@@ -1,0 +1,49 @@
+# HELP kafka_messages_total Total number of messages consumed from Kafka topics
+# TYPE kafka_messages_total counter
+{% for topic, count in messages_total.items() %}
+kafka_messages_total{topic="{{ topic }}"} {{ count }}
+{% endfor %}
+
+# HELP kafka_operations_total Total number of operations by type and topic
+# TYPE kafka_operations_total counter
+{% for key, count in operations_total.items() %}
+kafka_operations_total{topic="{{ key.topic }}", operation="{{ key.operation }}"} {{ count }}
+{% endfor %}
+
+# HELP kafka_last_message_timestamp_seconds Timestamp of the last consumed message per topic
+# TYPE kafka_last_message_timestamp_seconds gauge
+{% for topic, ts in last_message_ts.items() %}
+kafka_last_message_timestamp_seconds{topic="{{ topic }}"} {{ ts }}
+{% endfor %}
+
+# HELP kafka_consumer_errors_total Total number of consumer errors
+# TYPE kafka_consumer_errors_total counter
+kafka_consumer_errors_total {{ consumer_errors }}
+
+# HELP kafka_consumer_running Whether the Kafka consumer is running
+# TYPE kafka_consumer_running gauge
+kafka_consumer_running {{ consumer_running }}
+
+# HELP kafka_records_per_table_total Total records captured per table
+# TYPE kafka_records_per_table_total counter
+{% for table, count in records_per_table.items() %}
+kafka_records_per_table_total{table="{{ table }}"} {{ count }}
+{% endfor %}
+
+# HELP kafka_insert_total Total INSERT operations per table
+# TYPE kafka_insert_total counter
+{% for table, count in inserts_per_table.items() %}
+kafka_insert_total{table="{{ table }}"} {{ count }}
+{% endfor %}
+
+# HELP kafka_update_total Total UPDATE operations per table
+# TYPE kafka_update_total counter
+{% for table, count in updates_per_table.items() %}
+kafka_update_total{table="{{ table }}"} {{ count }}
+{% endfor %}
+
+# HELP kafka_delete_total Total DELETE operations per table
+# TYPE kafka_delete_total counter
+{% for table, count in deletes_per_table.items() %}
+kafka_delete_total{table="{{ table }}"} {{ count }}
+{% endfor %}

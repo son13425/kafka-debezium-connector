@@ -1,0 +1,9 @@
+{
+  "name": "prometheus-connector",
+  "config": {
+    "topics": "cdc.public.users,cdc.public.orders",
+    "confluent.topic.bootstrap.servers": "kafka-0:9092",
+    "prometheus.listener.url": "http://0.0.0.0:8080/metrics",
+    "reporter.result.topic.replication.factor": "1"
+  }
+}

@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'kafka-prometheus-connector'
+    static_configs:
+      - targets: ['kafka-prometheus-connector:8080']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
